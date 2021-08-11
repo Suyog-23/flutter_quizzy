@@ -3,6 +3,7 @@ import 'package:flutter/rendering.dart';
 import 'package:quizzy/components/answerbuttons.dart';
 import 'components/questiontext.dart';
 import 'components/answerbuttons.dart';
+import 'components/banner_image.dart';
 
 void main(){
   runApp(MyApp());
@@ -15,7 +16,29 @@ class MyApp extends StatefulWidget{
 
 class MyAppState extends State<MyApp>{
 
-  var allcontent = [
+  int i=0;
+
+  void changeQuestion(){
+    print('This works');
+    setState(() {
+       if(i>=2){
+         i=0;
+       }
+       else{
+         i+=1;
+       }
+    });
+  }
+
+
+  dynamic answers_show(String answers){
+    return AnswerButton(changeQuestion, answers);
+  }
+
+  @override 
+  Widget build(BuildContext context){
+
+     const allcontent = [
     {
       'question': 'The previous name of Facebook when it was released in Harvard was?',
       'image': 'https://s3.amazonaws.com/media.thecrimson.com/photos/2004/02/18/123348_1194988.jpg',
@@ -36,33 +59,11 @@ class MyAppState extends State<MyApp>{
 
   ];
 
-  dynamic answers_show(String answers){
-    return AnswerButton(changeQuestion, answers);
-  }
-
-  int i=0;
-
-  void changeQuestion(){
-    print('This works');
-    setState(() {
-       if(i>=2){
-         i=0;
-       }
-       else{
-         i+=1;
-       }
-    });
-  }
-
-
-  @override 
-  Widget build(BuildContext context){
     return MaterialApp(
       home: SafeArea(
         child: Scaffold(
 
           // AppBar starts --------------------------------------------------
-
           appBar: AppBar(
             backgroundColor: Colors.black,
             title: Center(child: Text('Quizzy'),),
@@ -79,11 +80,7 @@ class MyAppState extends State<MyApp>{
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
             
-                  Container(
-                    height: 350,
-                    width: 350,
-                    child: Image.network(allcontent[i]['image'] as String),
-                  ),
+                  BannerImage(allcontent[i]['image'] as String),
             
                   // Text Question ---------------------------------------------
                   QuestionText.itlaic(allcontent[i]['question'] as String), // Questions
@@ -91,8 +88,6 @@ class MyAppState extends State<MyApp>{
                   // Buttons: using map and spread operator --------------------
                   ...(allcontent[i]['answers'] as List<String>).
                   map(
-                    // (answer){
-                    // return AnswerButton(changeQuestion, answer);} 
                     answers_show,
                     ).toList() 
                   // Map function ends ------------------------------------------

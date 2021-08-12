@@ -4,6 +4,7 @@ import 'package:quizzy/components/answerbuttons.dart';
 import 'components/questiontext.dart';
 import 'components/answerbuttons.dart';
 import 'components/banner_image.dart';
+import 'section/quiz.dart';
 
 void main(){
   runApp(MyApp());
@@ -20,13 +21,8 @@ class MyAppState extends State<MyApp>{
 
   void changeQuestion(){
     print('This works');
-    setState(() {
-       if(i>=2){
-         i=0;
-       }
-       else{
+    setState(() {     
          i+=1;
-       }
     });
   }
 
@@ -73,30 +69,19 @@ class MyAppState extends State<MyApp>{
 
           // MainBody starts -------------------------------------------------
           
-          body: Container(
-            child: ListView(
+          body:Container(
+             child: ListView(
               scrollDirection: Axis.vertical,
-              children: [ Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-            
-                  BannerImage(allcontent[i]['image'] as String),
-            
-                  // Text Question ---------------------------------------------
-                  QuestionText.itlaic(allcontent[i]['question'] as String), // Questions
-            
-                  // Buttons: using map and spread operator --------------------
-                  ...(allcontent[i]['answers'] as List<String>).
-                  map(
-                    answers_show,
-                    ).toList() 
-                  // Map function ends ------------------------------------------
-                  
-                ],
+
+              //  ternary checker for quesions 
+             children: [  i < allcontent.length ? Quiz(allcontent[i]['image'] as String, allcontent[i]['question'] as String, allcontent[i]['answers'] as List<String>, answers_show)
+            //  else if no questions show the score
+              : Padding(padding: const EdgeInsets.only(top: 370),
+                child: Center(child: QuestionText('Your score: '),),
               ),
-              ],
+              ], 
             ),
-          ),
+          ), 
 
           // MainBody ends ------------------------------------------------------
 

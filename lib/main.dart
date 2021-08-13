@@ -101,7 +101,7 @@ class MyAppState extends State<MyApp>{
                       i=0;
                       total_score=0;
                     }),
-                  }, child: Text('Restart your Quiz'),
+                  }, child: Text('Restart The Quiz'),
                   style: ElevatedButton.styleFrom(
                         primary: Colors.black,
                         elevation: 10,

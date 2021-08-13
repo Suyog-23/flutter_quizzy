@@ -4,9 +4,9 @@ class AnswerButton extends StatelessWidget{
 
   var answertext;
   final Function answerchecker;
+  
 
-
-  AnswerButton(@required this.answerchecker, @required this.answertext,);
+  AnswerButton(@required this.answerchecker, @required this.answertext);
 
   @override 
   Widget build(BuildContext context){
@@ -23,6 +23,8 @@ class AnswerButton extends StatelessWidget{
                       child: Text(answertext),
                       onPressed: (){
                         answerchecker();
+                        
+                        
                         }
                     ),
                   ),        

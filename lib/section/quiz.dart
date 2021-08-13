@@ -23,8 +23,7 @@ class Quiz extends StatelessWidget{
                   QuestionText.itlaic(questiontext), // Questions
             
                   // Buttons: using map and spread operator --------------------
-                  ...(answertext).
-                  map(
+                  ...(answertext).map(
                     indi_ans_text,
                     ).toList() 
                   // Map function ends ------------------------------------------
